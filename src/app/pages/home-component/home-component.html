@@ -1,0 +1,225 @@
+<!-- Slider for banner images -->
+<div class="image-banners grad-dark-hero w-full">
+  <app-slider></app-slider>
+</div>
+
+<div class="collection grad-dark-stats py-6">
+  <!-- Our Collection 1 -->
+  <section id="collection1">
+    <h2
+      class="font-heading font-semibold text-white pt-3 text-center text-lg md:text-xl lg:text-3xl"
+    >
+      Our Collection
+    </h2>
+
+    <div class="cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 py-4 px-2 items-stretch">
+      <div
+        *ngFor="let collect of collection1()"
+        class="cursor-pointer h-full"
+        (click)="productDetails(collect.id, collect.category)"
+      >
+        <div
+          class="card h-full w-full flex flex-col justify-between items-start px-2 py-3 gap-2 rounded-md backdrop-blur-md bg-overlay-white-7 border border-white/12 hover:bg-overlay-amber-15 hover:border-amber-400/30 hover:-translate-y-1 transition-all duration-300"
+        >
+          <!-- Image container  -->
+          <div class="w-full aspect-square overflow-hidden rounded-sm">
+            <img
+              class="w-full h-full object-cover"
+              [src]="collect.image"
+              alt="{{ collect.name }}"
+              loading="lazy"
+            />
+          </div>
+
+          <h3
+            class="name w-full font-heading font-semibold pl-1 text-center text-white text-sm md:text-base lg:text-lg line-clamp-2 leading-tight"
+          >
+            {{ collect.name }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Collection 2 -->
+  <section id="collection2">
+    <div class="cards grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 py-4 px-2 items-stretch">
+      <div
+        *ngFor="let collect of collection2()"
+        class="cursor-pointer h-full"
+        (click)="productDetails(collect.id, collect.category)"
+      >
+        <div
+          class="card h-full w-full flex flex-col justify-between items-start px-2 py-3 gap-2 rounded-md backdrop-blur-md bg-overlay-white-7 border border-white/12 hover:bg-overlay-amber-15 hover:border-amber-400/30 hover:-translate-y-1 transition-all duration-300"
+        >
+          <!-- Image container  -->
+          <div class="w-full aspect-square overflow-hidden rounded-sm">
+            <img
+              class="w-full h-full object-cover"
+              [src]="collect.image"
+              alt="{{ collect.name }}"
+              loading="lazy"
+            />
+          </div>
+
+          <h3
+            class="name w-full font-heading font-semibold pl-1 text-center text-white text-sm md:text-base lg:text-lg line-clamp-2 leading-tight"
+          >
+            {{ collect.name }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Featured Collection -->
+<section id="featured1" class="py-10">
+  <h2
+    class="font-heading font-semibold text-heading pt-3 text-center text-lg md:text-xl lg:text-3xl"
+  >
+    Featured Collection
+  </h2>
+
+  <div
+    class="feature-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 py-6 px-4"
+  >
+    <div
+      *ngFor="let feature of features()"
+      class="cursor-pointer h-full"
+      (click)="productDetails(feature.id, feature.category)"
+    >
+      <div
+        class="card w-full h-full flex flex-col items-start p-3 gap-2 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-amber-200 hover:-translate-y-1 transition-all duration-300"
+      >
+        <div class="w-full aspect-square overflow-hidden rounded-lg shrink-0">
+          <img
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            [src]="feature.image"
+            alt="{{ feature.name }}"
+            loading="lazy"
+          />
+        </div>
+
+        <h2
+          class="price w-full font-heading font-semibold pl-1 text-heading text-sm md:text-base lg:text-lg"
+        >
+          Rs. {{ feature.price }}
+        </h2>
+        <h3
+          class="name w-full font-heading font-semibold pl-1 text-main text-sm md:text-base lg:text-lg"
+        >
+          {{ feature.name }}
+        </h3>
+
+        <span
+          class="description w-full flex-1 line-clamp-3 font-body font-normal pl-1 text-muted text-xs md:text-sm lg:text-base"
+        >
+          {{ feature.description }}
+        </span>
+
+        <button
+          (click)="addtoCart(feature)"
+          class="w-full mt-auto grad-amber-btn py-2 rounded-lg font-heading font-semibold text-sm text-white cursor-pointer hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-200"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<div class="categories py-6">
+  <h2
+    class="font-heading font-semibold text-heading pt-3 text-center text-lg md:text-xl lg:text-3xl"
+  >
+    Categories
+  </h2>
+  <section id="categories1">
+    <div class="cards grid grid-cols-1 md:grid-cols-2 gap-3 py-4 px-4 md:px-8">
+      <div *ngFor="let category of categories" [routerLink]="category.route">
+        <div class="card group relative w-full overflow-hidden cursor-pointer rounded-sm">
+          <div class="w-full aspect-video overflow-hidden">
+            <img
+              class="w-full h-full object-cover transition-all duration-300 group-hover:blur-[2px] group-hover:-translate-y-1"
+              [src]="category.image"
+              alt="{{ category.name }}"
+              loading="lazy"
+            />
+          </div>
+          <h2
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-heading font-bold text-(--brand-accent) text-center text-lg md:text-xl lg:text-3xl opacity-0 group-hover:opacity-100 drop-shadow-lg transition duration-300 ease-out"
+          >
+            {{ category.name }}
+          </h2>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Latest Deals -->
+<section id="deals" class="py-10">
+  <h2
+    class="font-heading font-semibold text-heading pt-3 text-center text-lg md:text-xl lg:text-3xl"
+  >
+    Explore Our Latest Deals
+  </h2>
+
+  <div
+    class="deals-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 py-6 px-4"
+  >
+    <div
+      *ngFor="let deal of deals()"
+      class="h-full"
+      (click)="productDetails(deal.id, deal.category)"
+    >
+      <div
+        class="card w-full h-full flex flex-col items-start p-3 gap-2 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-amber-200 hover:-translate-y-1 transition-all duration-300"
+      >
+        <div class="w-full aspect-square overflow-hidden rounded-lg shrink-0">
+          <img
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            [src]="deal.image"
+            alt="{{ deal.name }}"
+            loading="lazy"
+          />
+        </div>
+
+        <h2
+          class="price w-full font-heading font-semibold pl-1 text-heading text-sm md:text-base lg:text-lg"
+        >
+          Rs. {{ deal.price }}
+        </h2>
+        <h3
+          class="name w-full font-heading font-semibold pl-1 text-main text-sm md:text-base lg:text-lg"
+        >
+          {{ deal.name }}
+        </h3>
+
+        <span
+          class="description w-full flex-1 line-clamp-3 font-body font-normal pl-1 text-muted text-xs md:text-sm lg:text-base"
+        >
+          {{ deal.description }}
+        </span>
+
+        <button
+          (click)="addtoCart(deal)"
+          class="w-full mt-auto grad-amber-btn py-2 rounded-lg font-heading font-semibold text-sm text-white cursor-pointer hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-200"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- View all deals button -->
+  <div class="flex justify-center mt-4 px-4">
+    <button
+      routerLink="/deals"
+      class="grad-amber-btn px-8 py-3 rounded-lg font-heading font-semibold text-sm text-white cursor-pointer hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-200"
+    >
+      View All Deals
+    </button>
+  </div>
+</section>

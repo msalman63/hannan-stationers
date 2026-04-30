@@ -1,0 +1,51 @@
+<!--Product Details Component-->
+@if (isLoading) {
+  <app-spinner></app-spinner>
+} @else if (detailProduct) {
+  <div class="content grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 md:p-6">
+    <!--Left Side - Product Image-->
+    <div
+      class="image-container w-full h-110 bg-white rounded-md p-3 sm:p-4 md:p-6 border border-gray-200"
+    >
+      <div class="h-full w-full">
+        <img
+          class="w-full h-full object-contain"
+          [src]="detailProduct.image"
+          [alt]="detailProduct.name"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Right Side - Product Details -->
+    <div
+      class="product-summary flex flex-col items-start gap-3 border border-gray-200 rounded-md p-4 md:p-6"
+    >
+      <!--Prod. Name-->
+      <h3 class="font-heading font-semibold text-heading text-xl md:text-2xl lg:text-3xl">
+        {{ detailProduct.name }}
+      </h3>
+      <!--Prod. Price-->
+      <h3 class="font-heading font-semibold text-heading text-lg md:text-xl lg:text-2xl">
+        Rs. {{ detailProduct.price }}
+      </h3>
+      <p
+        class="description w-full flex-1 font-body font-normal pl-1 text-muted text-sm md:text-base lg:text-lg"
+      >
+        {{ detailProduct.description }}
+      </p>
+      <button
+        (click)="addToCart()"
+        class="w-full grad-amber-btn mt-4 py-2 rounded-lg font-heading font-semibold text-sm text-white cursor-pointer hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-200"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+} @else {
+  <div class="page-not-found flex justify-center items-center min-h-140 lg:min-h-120">
+    <span class="w-full font-body font-normal text-muted text-sm md:text-base lg:text-lg"
+      >No Product Found!</span
+    >
+  </div>
+}

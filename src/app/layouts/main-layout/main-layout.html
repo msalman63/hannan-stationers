@@ -1,0 +1,20 @@
+<div class="main-layout min-h-screen flex flex-col">
+  <app-header class="fixed top-0 left-0 right-0 z-40 shrink-0"></app-header>
+
+  <!--  pt-34 pushes content below fixed header on all devices & pb-13.75 pushes content above fixed mobile bottom nav-->
+  <main class="flex-1 w-full h-full overflow-x-hidden pt-34 pb-13.75 md:pb-0">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-side-bar></app-side-bar>
+  <app-footer class="shrink-0"></app-footer>
+</div>
+
+<!--Whatsapp Fixed Icon-->
+<a
+  target="_blank"
+  href="https://wa.me/923316258771"
+  class="fixed right-5 bottom-20 lg:bottom-10 z-50 w-14 h-14 flex justify-center items-center bg-[#25D366] rounded-full"
+>
+  <img class="icon" src="images/whatsapp.svg" alt="whatsapp" />
+</a>

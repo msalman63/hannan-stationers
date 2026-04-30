@@ -1,0 +1,163 @@
+@if (isPageLoading) {
+  <app-spinner></app-spinner>
+} @else {
+  <div class="admin-settings">
+    <!-- Heading -->
+    <div class="settings bg-gray-100 px-3 md:px-5 lg:px-7 py-5">
+      <h1
+        class="heading font-heading font-semibold text-heading text-center text-base md:text-xl lg:text-2xl"
+      >
+        Site Settings
+      </h1>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-container mx-auto bg-gray-100 my-4 px-3 md:px-5 lg:px-7 py-5">
+      <form [formGroup]="settingForm" (ngSubmit)="onSubmit()">
+        <div class="form-data flex flex-col gap-4">
+          <!-- Grid Fields -->
+          <div class="fields grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
+            <!-- Email -->
+            <div class="flex flex-col gap-0.5">
+              <label for="email" class="font-heading font-semibold text-sm md:text-base">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="contact@example.com"
+                class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+              />
+              @if (settingForm.get('email')?.touched && settingForm.get('email')?.errors) {
+                <small class="text-red-600 font-body text-xs md:text-sm text-start">
+                  Enter a valid email address
+                </small>
+              }
+            </div>
+
+            <!-- Phone -->
+            <div class="flex flex-col gap-0.5">
+              <label for="phone" class="font-heading font-semibold text-sm md:text-base">
+                Phone
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                formControlName="phone"
+                placeholder="+92 300 0000000"
+                class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+              />
+              @if (settingForm.get('phone')?.touched && settingForm.get('phone')?.errors) {
+                <small class="text-red-600 font-body text-xs md:text-sm text-start">
+                  Enter a valid phone number (10–15 digits)
+                </small>
+              }
+            </div>
+
+            <!-- Location (full width) -->
+            <div class="col-span-1 sm:col-span-2 flex flex-col gap-0.5">
+              <label for="location" class="font-heading font-semibold text-sm md:text-base">
+                Location
+              </label>
+              <input
+                id="location"
+                formControlName="location"
+                placeholder="City, Country"
+                class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+              />
+              @if (settingForm.get('location')?.touched && settingForm.get('location')?.errors) {
+                <small class="text-red-600 font-body text-xs md:text-sm text-start">
+                  Minimum 5 characters required
+                </small>
+              }
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="flex flex-col gap-0.5">
+              <label for="whatsapp" class="font-heading font-semibold text-sm md:text-base">
+                WhatsApp
+              </label>
+              <input
+                id="whatsapp"
+                formControlName="whatsapp"
+                placeholder="https://wa.me/923001234567"
+                class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+              />
+              @if (settingForm.get('whatsapp')?.touched && settingForm.get('whatsapp')?.errors) {
+                <small class="text-red-600 font-body text-xs md:text-sm text-start">
+                  Format: https://wa.me/923001234567
+                </small>
+              }
+            </div>
+
+            <!-- Facebook -->
+            <div class="flex flex-col gap-0.5">
+              <label for="facebook" class="font-heading font-semibold text-sm md:text-base">
+                Facebook
+              </label>
+              <input
+                id="facebook"
+                formControlName="facebook"
+                placeholder="https://facebook.com/yourpage"
+                class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+              />
+              @if (settingForm.get('facebook')?.touched && settingForm.get('facebook')?.errors) {
+                <small class="text-red-600 font-body text-xs md:text-sm text-start">
+                  Enter a valid Facebook URL
+                </small>
+              }
+            </div>
+
+            <!-- Instagram -->
+            <div class="flex flex-col gap-0.5">
+              <label for="instagram" class="font-heading font-semibold text-sm md:text-base">
+                Instagram
+              </label>
+              <input
+                id="instagram"
+                formControlName="instagram"
+                placeholder="https://instagram.com/yourhandle"
+                class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+              />
+              @if (settingForm.get('instagram')?.touched && settingForm.get('instagram')?.errors) {
+                <small class="text-red-600 font-body text-xs md:text-sm text-start">
+                  Enter a valid Instagram URL
+                </small>
+              }
+            </div>
+
+            <!-- TikTok -->
+            <div class="flex flex-col gap-0.5">
+              <label for="tiktok" class="font-heading font-semibold text-sm md:text-base">
+                TikTok
+              </label>
+              <input
+                id="tiktok"
+                formControlName="tiktok"
+                placeholder="https://tiktok.com/@yourhandle"
+                class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+              />
+              @if (settingForm.get('tiktok')?.touched && settingForm.get('tiktok')?.errors) {
+                <small class="text-red-600 font-body text-xs md:text-sm text-start">
+                  Format: https://tiktok.com/@yourhandle
+                </small>
+              }
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="btn self-center mt-4">
+            <button
+              type="submit"
+              [disabled]="settingForm.invalid || isLoading"
+              class="disabled:bg-blue-200 bg-blue-500 px-6 py-1.5 font-heading font-semibold text-sm md:text-base text-white rounded-lg cursor-pointer hover:bg-blue-600 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              {{ isLoading ? 'Saving...' : 'Save Settings' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+}

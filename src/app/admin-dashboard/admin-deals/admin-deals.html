@@ -1,0 +1,212 @@
+@if (isPageLoading) {
+  <app-spinner></app-spinner>
+} @else {
+  <div class="admin-deals">
+    <!--Heading & Button-->
+    <div
+      class="add-spodealsrts flex justify-between items-center bg-gray-100 px-3 md:px-5 lg:px-7 py-5"
+    >
+      <h1
+        class="heading font-heading font-semibold text-heading text-center text-base md:text-xl lg:text-2xl"
+      >
+        Available Deals
+      </h1>
+      <button
+        (click)="openModal()"
+        class="grad-amber-btn px-5 py-2 rounded-lg font-heading font-semibold text-sm text-white cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all duration-300"
+      >
+        Add Deals
+      </button>
+    </div>
+
+    <!--Cards to Show items-->
+    <div
+      *ngFor="let item of dealsItems()"
+      class="deals-card flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center gap-2 md:gap-0 bg-gray-100 my-4 px-3 md:px-5 lg:px-7 py-5 hover:-translate-y-0.5 transition-all duration-300"
+    >
+      <h1
+        class="item-name font-heading font-semibold text-heading text-center text-base md:text-lg lg:text-xl"
+      >
+        {{ item.name }}
+      </h1>
+      <!--Edit/Delete buttons-->
+      <div class="edit-del flex justify-between items-center gap-2 self-end">
+        <!--Date-->
+        <div class="date text-xs sm:text-sm text-gray-600 font-inter pr-4">
+          {{ item.created_at | date: 'MMM d, y' }}
+        </div>
+        <button
+          type="button"
+          *ngIf="item.id"
+          (click)="startUpdate(item)"
+          class="bg-blue-500 px-5 py-1 font-heading font-semibold text-white text-center text-sm md:text-base rounded-md cursor-pointer hover:bg-blue-600 hover:-translate-y-0.5 transition-all duration-300"
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          *ngIf="item.id"
+          (click)="deleteDeals(item.id)"
+          class="bg-red-500 px-5 py-1 font-heading font-semibold text-white text-center text-sm md:text-base rounded-md cursor-pointer hover:bg-red-600 hover:-translate-y-0.5 transition-all duration-300"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <!--Modal to Open the Form-->
+    <app-modal *ngIf="isModalOpen" (click)="closeModal()">
+      <div class="form flex flex-col justify-center gap-2">
+        <div
+          class="form-container mx-auto bg-white hover:-translate-y-0.5 transition-all duration-300 rounded-md w-full max-w-2xl lg:max-w-4xl p-3 sm:p-4 md:p-6"
+        >
+          <form [formGroup]="dealsForm" (ngSubmit)="onSubmit()">
+            <div class="form-data flex flex-col">
+              <div class="input-field max-w-full mx-auto pb-2 sm:pb-3">
+                <input
+                  type="file"
+                  #fileInput
+                  multiple
+                  (change)="onFileSelected($event)"
+                  accept="image/*"
+                  class="hidden"
+                />
+
+                <!-- Empty placeholder — shown only when no images are selected -->
+                <div
+                  *ngIf="imagePreview().length === 0"
+                  (click)="fileInput.click()"
+                  class="main-placeholder w-32 h-32 sm:w-40 sm:h-40 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer bg-gray-50 hover:border-blue-500 hover:bg-blue-50 transition-colors duration-300 mx-auto"
+                >
+                  <div class="text-center">
+                    <span class="text-4xl md:text-6xl text-gray-400">+</span>
+                    <p class="mt-2 text-xs sm:text-sm text-gray-500">Click to upload</p>
+                    <p class="mt-1 text-xs text-gray-500">PNG, JPG (max 1MB)</p>
+                  </div>
+                </div>
+                <!--Image Preview-->
+                <div
+                  *ngIf="imagePreview().length > 0"
+                  class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto"
+                >
+                  <img
+                    [src]="imagePreview()[0]"
+                    class="w-full h-full object-cover rounded-lg border border-amber-500"
+                    alt="Preview"
+                  />
+                  <button
+                    type="button"
+                    (click)="removeImage(0)"
+                    class="absolute -top-2 -right-1.5 cursor-pointer"
+                  >
+                    <img class="w-6 h-6" src="images/removeButton.png" />
+                  </button>
+                </div>
+              </div>
+
+              <!--Fields (name, Price, description etc)-->
+              <div class="fields grid grid-cols-1 sm:grid-cols-2 gap-2 items-start">
+                <!--Name-->
+                <div class="name col-span-1 flex flex-col justify-between gap-0.5">
+                  <label for="name" class="font-heading font-semibold text-sm md:text-base"
+                    >Name</label
+                  >
+                  <input
+                    id="name"
+                    class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+                    placeholder="Enter Name"
+                    formControlName="name"
+                  />
+                  <small
+                    class="text-red-600 font-body text-xs md:text-sm text-start"
+                    *ngIf="dealsForm.get('name')?.touched && dealsForm.get('name')?.errors"
+                  >
+                    Name is required
+                  </small>
+                </div>
+
+                <!--Price-->
+                <div class="price col-span-1 flex flex-col justify-between gap-0.5">
+                  <label for="price" class="font-heading font-semibold text-sm md:text-base"
+                    >Price</label
+                  >
+                  <input
+                    id="price"
+                    class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+                    placeholder="Enter Price"
+                    formControlName="price"
+                  />
+                  <small
+                    class="text-red-600 font-body text-xs md:text-sm text-start"
+                    *ngIf="dealsForm.get('price')?.touched && dealsForm.get('price')?.errors"
+                  >
+                    Price is required
+                  </small>
+                </div>
+
+                <!--Category dropdown — admin selects which category this deal belongs to -->
+                <div class="category col-span-2 flex flex-col justify-between gap-0.5">
+                  <label for="category" class="font-heading font-semibold text-sm md:text-base"
+                    >Category</label
+                  >
+                  <select
+                    id="category"
+                    class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+                    formControlName="category"
+                  >
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="stationery">Stationery</option>
+                    <option value="grocery">Grocery</option>
+                    <option value="sports">Sports</option>
+                    <option value="tobacco">Tobacco</option>
+                  </select>
+                  <!-- error shown when category is not selected -->
+                  <small
+                    class="text-red-600 font-body text-xs md:text-sm text-start"
+                    *ngIf="dealsForm.get('category')?.touched && dealsForm.get('category')?.errors"
+                  >
+                    Category is required
+                  </small>
+                </div>
+
+                <!--Description (Full Width)-->
+                <div class="description col-span-1 sm:col-span-2 flex flex-col py-2 gap-1">
+                  <label for="description" class="font-heading font-semibold text-sm md:text-base"
+                    >Description</label
+                  >
+                  <textarea
+                    id="description"
+                    rows="4"
+                    cols="30"
+                    placeholder="Enter description"
+                    formControlName="description"
+                    class="text-sm md:text-base placeholder:text-gray-400 text-gray-800 font-normal font-body border border-gray-300 rounded p-2 focus:border-none focus:outline-1 outline-amber-500"
+                  ></textarea>
+                  <small
+                    class="text-red-600 font-body text-xs md:text-sm text-start"
+                    *ngIf="
+                      dealsForm.get('description')?.touched && dealsForm.get('description')?.errors
+                    "
+                  >
+                    Description is required
+                  </small>
+                </div>
+              </div>
+
+              <!--Button-->
+              <div class="btn self-center mt-2">
+                <button
+                  class="disabled:bg-blue-200 bg-blue-500 px-6 py-1.5 font-heading font-semibold text-sm md:text-base text-white rounded-lg cursor-pointer hover:bg-blue-600 hover:-translate-y-0.5 transition-all duration-300"
+                  type="submit"
+                  [disabled]="!dealsForm.valid || isLoading"
+                >
+                  {{ isEditMode ? 'Update' : 'Save' }}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </app-modal>
+  </div>
+}

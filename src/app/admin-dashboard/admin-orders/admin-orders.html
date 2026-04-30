@@ -1,0 +1,140 @@
+@if (isPageLoading) {
+  <app-spinner></app-spinner>
+} @else {
+  <div class="admin-orders">
+    <!--Heading-->
+    <div class="heading bg-gray-100 px-3 md:px-5 lg:px-7 py-5">
+      <h1
+        class="heading font-heading font-semibold text-heading text-center text-base md:text-xl lg:text-2xl"
+      >
+        Available Orders
+      </h1>
+    </div>
+
+    <!--Table for all orders-->
+    <div class="available-orders-table overflow-x-auto">
+      <table class="w-full table-auto border-collapse">
+        <!--Table Headers-->
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="px-4 py-3"></th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Id</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Customer</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Phone</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">City</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Address</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Total</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Payment</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Status</th>
+            <th class="px-4 py-3 text-left font-heading text-sm md:text-base">Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (order of orders(); track order.id) {
+            <!-- order row -->
+            <tr
+              (click)="toggleExpand(order.id!)"
+              class="border-b border-gray-200 bg-white-muted hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+            >
+              <!-- arrow icon -->
+              <td class="px-4 py-3">
+                <span
+                  class="inline-block transition-transform duration-300 font-heading font-semibold text-base"
+                  [class.rotate-90]="expandedOrderId() === order.id"
+                >
+                  ▶
+                </span>
+              </td>
+
+              <td class="px-4 py-3 font-body text-sm whitespace-nowrap">
+                #{{ order.id | slice: 0 : 8 }}
+              </td>
+
+              <td
+                class="px-4 py-3 font-body text-sm max-w-25 text-center lg:text-start lg:whitespace-nowrap"
+              >
+                {{ order.fname }} {{ order.lname }}
+              </td>
+
+              <td class="px-4 py-3 font-body text-sm whitespace-nowrap">
+                {{ order.phone }}
+              </td>
+
+              <td class="px-4 py-3 font-body text-sm whitespace-nowrap">
+                {{ order.city }}
+              </td>
+
+              <td class="px-4 py-3 font-body text-sm max-w-30 truncate">
+                {{ order.address }}
+              </td>
+
+              <td class="px-4 py-3 font-body text-sm font-semibold whitespace-nowrap">
+                {{ order.total }} PKR
+              </td>
+
+              <td class="px-4 py-3 font-body text-sm whitespace-nowrap">
+                {{ order.payment }}
+              </td>
+
+              <td class="px-4 py-3">
+                <select
+                  [value]="order.status"
+                  (change)="updateOrderStatus(order.id!, $any($event.target).value)"
+                  (click)="$event.stopPropagation()"
+                  class="font-body text-sm border border-gray-300 rounded px-1 py-1.5 focus:outline-1 outline-amber-500 whitespace-nowrap"
+                  [class.text-muted]="order.status === 'pending'"
+                  [class.text-heading]="order.status === 'confirmed'"
+                  [class.text-green-600]="order.status === 'delivered'"
+                >
+                  <option value="pending">Pending</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="delivered">Delivered</option>
+                </select>
+              </td>
+
+              <td class="px-4 py-3 font-body text-sm whitespace-nowrap">
+                {{ order.created_at | date: 'MMM d, y' }}
+              </td>
+            </tr>
+
+            <!-- order items expanded row -->
+            @if (expandedOrderId() === order.id) {
+              <tr class="bg-gray-50 border-b border-gray-200">
+                <td colspan="10" class="px-6 py-4">
+                  <!--full address shown in expanded view -->
+                  <div class="mb-3">
+                    <span class="font-heading font-semibold text-xs md:text-sm">Deliver To: </span>
+                    <span class="font-body text-xs md:text-sm text-gray-600">
+                      {{ order.address }}, {{ order.city }}
+                    </span>
+                  </div>
+
+                  <div class="order-items flex flex-wrap items-center gap-3">
+                    <span class="font-heading font-semibold text-xs md:text-sm">Items:</span>
+
+                    @for (item of order.order_items; track item.id) {
+                      <div
+                        class="item flex items-center gap-2 bg-white border border-gray-200 rounded-md px-2 py-1"
+                      >
+                        <img
+                          [src]="item.image"
+                          [alt]="item.name"
+                          class="w-8 h-8 object-cover rounded"
+                        />
+                        <span class="font-body text-xs">
+                          {{ item.name }} x {{ item.quantity }} —
+                          {{ item.price * item.quantity }} PKR
+                        </span>
+                      </div>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+}

@@ -1,1 +1,149 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+
+@import 'ngx-toastr/toastr';
+
+#toast-container > div {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.15) !important;
+}
+
+@theme {
+  /* Backgrounds */
+  --bg-main: oklch(20.8% 0.042 265.755); /* deep slate-900  */
+  --bg-secondary: oklch(21.6% 0.006 56.043); /* deep stone-900  */
+  --bg-surface: #f4efe8; /* soft cream      */
+
+  /* Text Colors */
+  --color-main-text: #1e2a38; /* navy on cream   */
+  --color-muted: oklch(55.1% 0.027 264.364); /* secondary gray  */
+  --color-heading: oklch(66.6% 0.179 58.318); /* amber heading   */
+
+  /* Semi-transparent white (for dark sections) */
+  --color-white-muted: rgba(255, 255, 255, 0.7);
+  --color-white-dim: rgba(255, 255, 255, 0.6);
+
+  /* Brand / Accent */
+  --brand-accent: #c59d5f; /* luxury gold */
+  --brand-accent-2: #4b3b2f; /* rich brown  */
+
+  /* Overlay backgrounds (glassmorphism) */
+  --overlay-white-6: rgba(255, 255, 255, 0.06);
+  --overlay-white-7: rgba(255, 255, 255, 0.07);
+  --overlay-white-10: rgba(255, 255, 255, 0.1);
+  --overlay-white-12: rgba(255, 255, 255, 0.12);
+  --overlay-amber-15: rgba(245, 158, 11, 0.15);
+
+  /* --- Fonts --- */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* CUSTOM UTILITIES  — declared with @utility */
+
+/* Background utilities */
+@utility bg-main {
+  background: var(--bg-main);
+}
+@utility bg-secondary {
+  background: var(--bg-secondary);
+}
+@utility bg-surface {
+  background: var(--bg-surface);
+}
+@utility bg-accent {
+  background: var(--brand-accent);
+}
+@utility bg-accent-2 {
+  background: var(--brand-accent-2);
+}
+
+/* Overlay / glassmorphism */
+@utility bg-overlay-white-6 {
+  background: var(--overlay-white-6);
+}
+@utility bg-overlay-white-7 {
+  background: var(--overlay-white-7);
+}
+@utility bg-overlay-amber-15 {
+  background: var(--overlay-amber-15);
+}
+
+/* Text color utilities */
+@utility text-main {
+  color: var(--color-main-text);
+}
+@utility text-muted {
+  color: var(--color-muted);
+}
+@utility text-heading {
+  color: var(--color-heading);
+}
+@utility text-white-muted {
+  color: var(--color-white-muted);
+}
+@utility text-white-dim {
+  color: var(--color-white-dim);
+}
+
+/*  Border utilities  */
+@utility border-accent {
+  border-color: var(--brand-accent);
+}
+@utility border-white-10 {
+  border-color: var(--overlay-white-10);
+}
+@utility border-white-12 {
+  border-color: var(--overlay-white-12);
+}
+
+/*  Font family utilities  */
+@utility font-heading {
+  font-family: var(--font-heading);
+}
+@utility font-body {
+  font-family: var(--font-body);
+}
+
+@utility grad-dark-hero {
+  background: linear-gradient(to bottom right, #1e293b, #1f2937, #1c1917);
+}
+@utility grad-dark-stats {
+  background: linear-gradient(to bottom right, #0f172a, #1e293b, #1c1917);
+}
+@utility grad-dark-footer {
+  background: linear-gradient(to bottom right, #1e293b, #0f172a);
+}
+@utility grad-surface-card {
+  background: linear-gradient(to bottom right, #1e293b, #374151, #1c1917);
+}
+@utility grad-amber {
+  background: linear-gradient(to right, #fbbf24, #d97706);
+}
+@utility grad-amber-btn {
+  background: linear-gradient(to right, #fbbf24, #d97706);
+}
+@utility grad-amber-card {
+  background: linear-gradient(to bottom right, #fffbeb, #fef3c7);
+}
+@utility grad-emerald-card {
+  background: linear-gradient(to bottom right, #ecfdf5, #d1fae5);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+}

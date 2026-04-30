@@ -1,0 +1,8 @@
+.product-not-found{
+    height: calc(100vh - 191px); /*136px nav + 55px footer on mobiles*/
+}
+@media (min-width : 768px){
+    .product-not-found{
+        height : calc(100vh - 136) /*136 only for nav*/
+    }
+}

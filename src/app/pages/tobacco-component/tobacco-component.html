@@ -1,0 +1,64 @@
+<div class="heading px-4 pt-6 pb-4 text-center">
+  <h1 class="font-heading font-semibold text-heading text-2xl md:text-3xl lg:text-4xl">
+    Tobacco Items
+  </h1>
+</div>
+
+@if (isLoading) {
+  <app-spinner></app-spinner>>
+} @else if (tobacco().length > 0) {
+  <div
+    class="tobacco-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 py-6 px-4"
+  >
+    <div
+      *ngFor="let item of tobacco()"
+      class="h-full cursor-pointer"
+      (click)="productDetails(item.id!, 'tobacco')"
+    >
+      <div
+        class="card w-full h-full flex flex-col items-start p-3 gap-2 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-amber-200 hover:-translate-y-1 transition-all duration-300"
+      >
+        <div class="w-full aspect-square overflow-hidden rounded-lg shrink-0">
+          <img
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            [src]="item.image"
+            alt="{{ item.name }}"
+            loading="lazy"
+          />
+        </div>
+
+        <h2
+          class="price w-full font-heading font-semibold pl-1 text-heading text-sm md:text-base lg:text-lg"
+        >
+          Rs. {{ item.price }}
+        </h2>
+
+        <h3
+          class="name w-full font-heading font-semibold pl-1 text-main text-sm md:text-base lg:text-lg"
+        >
+          {{ item.name }}
+        </h3>
+
+        <span
+          class="description w-full flex-1 line-clamp-3 font-body font-normal pl-1 text-muted text-xs md:text-sm lg:text-base"
+        >
+          {{ item.description }}
+        </span>
+
+        <button
+          (click)="addToCart(item)"
+          class="w-full grad-amber-btn py-2 mt-auto rounded-lg font-heading font-semibold text-sm text-white cursor-pointer hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-200"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="product-not-found flex justify-center items-center">
+    <span
+      class="w-full font-body font-normal text-muted text-center text-sm md:text-base lg:text-lg"
+      >No Product Found!</span
+    >
+  </div>
+}

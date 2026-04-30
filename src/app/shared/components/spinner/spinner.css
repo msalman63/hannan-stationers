@@ -1,0 +1,9 @@
+.loading {
+  height: calc(100vh - 191px); /* mobile: 136px header + 55px bottom nav */
+}
+
+@media (min-width: 768px) {
+  .loading {
+    height: calc(100vh - 136px); /* desktop: header only */
+  }
+}

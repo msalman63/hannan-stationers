@@ -1,0 +1,96 @@
+<div
+  class="side-bar-component fixed inset-0 z-20 h-screen w-full bg-[rgba(0,0,0,0.4)] transition-opacity duration-300"
+  [class.opacity-0]="!cartService.isCartOpen()"
+  [class.pointer-events-none]="!cartService.isCartOpen()"
+  (click)="cartService.closeCart()"
+>
+  <div
+    class="actual-side-bar h-full w-80 md:w-100 bg-white fixed flex flex-col justify-start right-0 top-0 transition-transform duration-300 overflow-y-auto translate-x-full"
+    [class.translate-x-full]="!cartService.isCartOpen()"
+    [class.translate-x-0]="cartService.isCartOpen()"
+    (click)="$event.stopPropagation()"
+  >
+    <!--topbar-->
+    <div class="top-bar flex justify-between items-center px-3 py-4 border-b border-gray-300">
+      <span class="cart font-heading font-normal text-base md:text-lg lg:text-xl tracking-wide"
+        >CART</span
+      >
+      <button (click)="cartService.closeCart()" class="close-btn cursor-pointer hover:-translate-y-0.5 transition-all duration-300">
+        <img class="w-3 h-3 md:w-4 md:h-4" src="images/close.png" alt="remove" />
+      </button>
+    </div>
+
+    <!--highlighted-line-->
+    <div
+      class="free-ship-line font-heading font-normal text-muted text-center text-sm tracking-wide py-2 border-b border-gray-300"
+    >
+      Free Shipping on orders PKR 2000+
+    </div>
+
+    <!-- Empty cart check -->
+    @if (cartService.cartItems().length === 0) {
+      <div class="flex flex-1 justify-center items-center">
+        <span class="font-body text-muted text-sm tracking-wide">Your cart is empty</span>
+      </div>
+    } @else {
+      <!-- Loop through cart items -->
+      @for (item of cartService.cartItems(); track item.id) {
+        <div
+          class="product w-full px-6 py-10 flex justify-center items-center gap-6 border-b border-gray-300"
+        >
+          <div class="image w-14 h-14">
+            <img [src]="item.image" [alt]="item.name" class="w-full h-full object-cover" />
+          </div>
+
+          <div class="product-details flex flex-col justify-between gap-4">
+            <div class="name-price flex flex-col justify-between gap-2">
+              <span class="name font-body font-normal text-muted text-sm tracking-wide">{{
+                item.name
+              }}</span>
+              <span class="price font-body font-normal text-muted text-sm tracking-wide"
+                >{{ item.price }} PKR</span
+              >
+            </div>
+
+            <div class="buttons flex justify-center items-center gap-2">
+              <div
+                class="increase-quantity-decrease flex justify-between items-center gap-4 border border-gray-400 px-6"
+              >
+                <button (click)="cartService.decreaseQty(item)" class="text-xl md:text-2xl cursor-pointer">
+                  -
+                </button>
+                <span class="text-lg md:text-xl">{{ item.quantity }}</span>
+                <button (click)="cartService.increaseQty(item)" class="text-xl md:text-2xl cursor-pointer">
+                  +
+                </button>
+              </div>
+
+              <div class="remove">
+                <button
+                  (click)="cartService.removeFromCart(item)"
+                  class="cursor-pointer hover:underline font-body text-base"
+                >
+                  remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      <!--Checkout button-->
+      <div
+        class="checkout-btn w-full flex flex-col justify-between items-center gap-3 px-6 py-8 mt-auto border-t border-gray-300"
+      >
+        <span class="font-body font-normal text-muted text-xs tracking-wide"
+          >Taxes and shipping calculated at checkout</span
+        >
+        <button
+          (click)="goToCheckout()"
+          class="w-full grad-amber-btn py-1.5 rounded-lg font-heading font-semibold text-white text-center text-base md:text-lg tracking-wide cursor-pointer"
+        >
+          checkout - {{ cartService.getTotal() }} PKR
+        </button>
+      </div>
+    }
+  </div>
+</div>

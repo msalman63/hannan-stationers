@@ -1,0 +1,192 @@
+<!--Small Banner-->
+<div
+  class="header-banner grad-amber flex flex-col md:flex-row gap-2 p-2 items-center justify-center md:justify-between md:px-4 text-foreground"
+>
+  <span
+    class="heading-line font-heading text-xs md:text-sm lg:text-base text-center text-main font-semibold"
+    >Grocery • Stationery • Daily Needs</span
+  >
+  <span
+    class="whatsapp font-heading text-xs md:text-sm lg:text-base text-center text-main font-semibold"
+    >WhatsApp/Call +92331-6258771 | Mon - Sun 9am to 6pm</span
+  >
+  <span
+    class="help-support hidden lg:flex font-heading text-xs md:text-sm lg:text-base text-center text-main font-semibold"
+    >Help & Support</span
+  >
+</div>
+
+<!--Nav-Bar-->
+<nav class="grad-dark-hero">
+  <div class="nav max-w-7xl mx-auto px-3 md:px-6">
+    <div class="logo-links flex items-center justify-between h-20 md:h-24">
+      <!--Logo-->
+      <div class="logo shrink-0">
+        <a routerLink="/" class="flex items-center cursor-pointer">
+          <img class="h-18 md:h-24 w-auto object-contain" src="images/hsLogo.png" alt="HS-Logo" />
+        </a>
+      </div>
+
+      <!--Desktop Navigation Links-->
+      <div class="desktop-links hidden xl:flex items-center gap-8 px-6">
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-white text-base font-heading font-normal tracking-wide px-3 py-1.5 rounded-md transition duration-200 cursor-pointer"
+          >Home</a
+        >
+
+        <a
+          routerLink="/stationers"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-white text-base font-heading font-normal tracking-wide px-3 py-1.5 rounded-md transition duration-200 cursor-pointer"
+          >Stationery</a
+        >
+
+        <a
+          routerLink="/grocery"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-white text-base font-heading font-normal tracking-wide px-3 py-1.5 rounded-md transition duration-200 cursor-pointer"
+          >Grocery</a
+        >
+
+        <a
+          routerLink="/tobacco"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-white text-base font-heading font-normal tracking-wide px-3 py-1.5 rounded-md transition duration-200 cursor-pointer"
+          >Tobaccos</a
+        >
+
+        <a
+          routerLink="/about"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-white text-base font-heading font-normal tracking-wide px-3 py-1.5 rounded-md transition duration-200 cursor-pointer"
+          >About Us</a
+        >
+
+        <a
+          *ngIf="!isLoggedIn"
+          routerLink="/login"
+          class="px-4 py-2 rounded-md transition duration-200 cursor-pointer"
+          ><img class="w-6.5 h-6.5" src="images/loginButton.png" />
+        </a>
+
+        <a
+          *ngIf="isLoggedIn"
+          routerLink="/admin"
+          routerLinkActive="active"
+          class="text-white text-base font-heading font-normal tracking-wide px-3 py-1.5 rounded-md transition duration-200 cursor-pointer"
+          >Dashboard</a
+        >
+
+        <a
+          *ngIf="isLoggedIn"
+          (click)="logOut()"
+          class="px-4 py-2 rounded-md transition duration-200 cursor-pointer"
+          ><img class="w-6.5 h-6.5" src="images/logoutButton.png" />
+        </a>
+        <!-- Cart icon button for desktop -->
+        <button (click)="cartService.toggleCart()" class="relative cursor-pointer px-2 py-2">
+          <!-- Cart icon image — replace src with your actual icon -->
+          <img class="w-6.5 h-6.5" src="images/addToCart.png" alt="cart" />
+          <span
+            *ngIf="cartService.cartItems().length > 0"
+            class="absolute -top-1 -right-1 bg-orange-400 text-white text-xs font-heading font-semibold rounded-full w-5 h-5 flex items-center justify-center"
+          >
+            {{ cartService.cartItems().length }}
+          </span>
+        </button>
+      </div>
+
+      <div class="burger-menu xl:hidden flex items-center gap-3">
+        <!-- Cart icon button for mobile-->
+        <button (click)="cartService.toggleCart()" class="relative cursor-pointer">
+          <!-- Cart icon image — replace src with your actual icon -->
+          <img class="w-7 h-7 md:w-8 md:h-8" src="images/addToCart.png" alt="cart" />
+          <span
+            *ngIf="cartService.cartItems().length > 0"
+            class="absolute -top-1 -right-1 bg-orange-400 text-white text-xs font-heading font-semibold rounded-full w-5 h-5 flex items-center justify-center"
+          >
+            {{ cartService.cartItems().length }}
+          </span>
+        </button>
+
+        <!-- Burger menu button -->
+        <button (click)="toggleMenu()">
+          <img class="w-7 h-7 md:w-9 md:h-9 cursor-pointer" src="images/menuBar.png" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--Mobile navigation Links-->
+  <div *ngIf="isMenuOpen" class="burger-menu xl:hidden grad-dark-hero">
+    <div class="links p-2 flex flex-col">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >Home</a
+      >
+
+      <a
+        routerLink="/stationers"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >Stationery</a
+      >
+
+      <a
+        routerLink="/grocery"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >Grocery</a
+      >
+
+      <a
+        routerLink="/tobacco"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >Tobaccos</a
+      >
+
+      <a
+        routerLink="/about"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >About Us</a
+      >
+      <a
+        *ngIf="!isLoggedIn"
+        routerLink="/login"
+        routerLinkActive="active"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >Log In</a
+      >
+
+      <a
+        *ngIf="isLoggedIn"
+        routerLink="/admin"
+        routerLinkActive="active"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >Dashboard</a
+      >
+      <a
+        *ngIf="isLoggedIn"
+        (click)="logOut()"
+        class="text-white text-lg font-heading font-normal tracking-wide px-4 py-1.5 rounded-md transition duration-200 cursor-pointer"
+        >Log Out</a
+      >
+    </div>
+  </div>
+</nav>

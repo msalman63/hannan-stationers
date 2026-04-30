@@ -1,0 +1,201 @@
+<footer class="bg-white border-t border-gray-200 left-0 right-0 md:relative mt-auto">
+  <!--Mobile Navigation Links-->
+  <div class="mobile-navigation md:hidden fixed bottom-0 left-0 right-0 z-10 bg-white border-t border-gray-200">
+    <div class="links flex justify-around items-center pt-2 pb-0.5">
+      <a
+        routerLink="/"
+        class="flex flex-col justify-center items-center gap-1 text-sm text-foreground"
+      >
+        <img class="w-6 h-6" src="images/home.png" />
+        <span class="name font-heading font-medium text-xs">Home</span>
+      </a>
+
+      <a
+        routerLink="/stationers"
+        class="flex flex-col justify-center items-center gap-1 text-sm text-foreground"
+      >
+        <img class="w-6 h-6" src="images/stationery.png" />
+        <span class="name font-heading font-medium text-xs">Stationery</span>
+      </a>
+
+      <a
+        routerLink="/grocery"
+        class="flex flex-col justify-center items-center gap-1 text-sm text-foreground"
+      >
+        <img class="w-6 h-6" src="images/grocery.png" />
+        <span class="name font-heading font-medium text-xs">Grocery</span>
+      </a>
+
+      <a
+        routerLink="/tobacco"
+        class="flex flex-col justify-center items-center gap-1 text-sm text-foreground"
+      >
+        <img class="w-6 h-6" src="images/Nosmoking.png" />
+        <span class="name font-heading font-medium text-xs">Tobacco</span>
+      </a>
+
+      <a
+        routerLink="/about"
+        class="flex flex-col justify-center items-center gap-1 text-sm text-foreground"
+      >
+        <img class="w-6 h-6" src="images/about.png" />
+        <span class="name font-heading font-medium text-xs">About</span>
+      </a>
+    </div>
+  </div>
+  <!--Desktop Footer-->
+  <div class="desktop-footer hidden md:block grad-dark-footer">
+    <div class="footer max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-2">
+      <div class="footer-link grid grid-cols-2 lg:grid-cols-4 items-start gap-4">
+        <!--About Section-->
+        <div
+          class="about flex flex-col justify-start items-start gap-2 border-r border-slate-700 px-3"
+        >
+          <div class="logo shrink-0">
+            <a routerLink="/" class="flex items-start cursor-pointer">
+              <img class="h-30 w-auto object-contain" src="images/hsLogo.png" alt="HS-Logo" />
+            </a>
+          </div>
+
+          <p
+            class="font-heading text-sm xl:text-base text-start text-white-muted hover:text-white hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Your one-stop shop for groceries, stationery, and daily essentials. Quality products,
+            fair prices, and service you can trust.
+          </p>
+        </div>
+
+        <!--Quick Links-->
+        <div
+          class="links flex flex-col justify-start items-start lg:items-center px-3 gap-4 border-r md:border-r-0 lg:border-r lg:border-slate-700"
+        >
+          <h1 class="font-heading font-semibold text-white text-center text-base xl:text-lg">
+            Quick Links
+          </h1>
+          <ul class="space-y-2">
+            <li><a href="/" class="font-body text-white-muted hover:text-white">Home</a></li>
+            <li>
+              <a href="/stationers" class="font-body text-white-muted hover:text-white"
+                >Stationery</a
+              >
+            </li>
+            <li>
+              <a href="/grocery" class="font-body text-white-muted hover:text-white">Grocery</a>
+            </li>
+            <li>
+              <a href="/tobacco" class="font-body text-white-muted hover:text-white">Tobbacco</a>
+            </li>
+            <li>
+              <a href="/about" class="font-body text-white-muted hover:text-white">About Us</a>
+            </li>
+          </ul>
+        </div>
+
+        <!--Popular Categories-->
+        <div
+          class="categories flex flex-col justify-start items-start lg:items-center px-3 gap-4 border-r border-slate-700"
+        >
+          <h1 class="font-heading font-semibold text-white text-center text-base xl:text-lg">
+            Popular Categories
+          </h1>
+          <ul class="space-y-2">
+            <li>
+              <a href="/#collection1" class="font-body text-white-muted hover:text-white"
+                >Daily Essentials</a
+              >
+            </li>
+            <li>
+              <a href="/#featured1" class="font-body text-white-muted hover:text-white"
+                >Featured Collection</a
+              >
+            </li>
+            <li>
+              <a href="/#categories1" class="font-body text-white-muted hover:text-white"
+                >Categories</a
+              >
+            </li>
+            <li>
+              <a href="/#deals" class="font-body text-white-muted hover:text-white">Latest Deals</a>
+            </li>
+          </ul>
+        </div>
+
+        <!--Contact-->
+        <div class="categories flex flex-col justify-start items-start gap-4 px-3">
+          <h1 class="font-heading font-semibold text-white text-start text-base xl:text-lg">
+            Contact
+          </h1>
+          <ul class="space-y-2">
+            <li class="flex justify-start items-center gap-2">
+              <img class="w-5 h-5 invert" src="images/call.png" alt="" />
+              <span
+                class="font-body text-white-muted hover:text-white text-start text-sm xl:text-base"
+                >{{ settingsService.settings()?.phone || '0331-6258771' }}</span
+              >
+            </li>
+            <li class="flex justify-start items-center gap-2">
+              <img class="w-5 h-5 invert" src="images/email.png" alt="" />
+              <span
+                class="font-body text-white-muted hover:text-white text-start text-sm xl:text-base"
+                >{{ settingsService.settings()?.email || 'info@htraders.com' }}</span
+              >
+            </li>
+            <li class="flex justify-start items-center gap-2">
+              <img class="w-5 h-5 invert" src="images/location.png" alt="" />
+              <span
+                class="font-body text-white-muted hover:text-white text-start text-sm xl:text-base"
+                >{{ settingsService.settings()?.location || 'Hannan Traders Bhaddar' }}</span
+              >
+            </li>
+            <li class="flex">
+              <img src="" alt="" />
+              <span class="font-heading font-semibold text-white text-start text-sm xl:text-base"
+                >Socials</span
+              >
+            </li>
+          </ul>
+          <ul *ngIf="settingsService.settings() as s" class="space-y-2 flex gap-4">
+            <li>
+              <a *ngIf="s.whatsapp" [href]="s.whatsapp" target="_blank"
+                ><img
+                  class="icon hover:-translate-y-1 transition-all duration-300"
+                  src="images/whatsapp.svg"
+                  alt=""
+              /></a>
+            </li>
+            <li>
+              <a *ngIf="s.tiktok" [href]="s.tiktok" target="_blank"
+                ><img
+                  class="icon hover:-translate-y-1 transition-all duration-300"
+                  src="images/tiktok.svg"
+                  alt=""
+              /></a>
+            </li>
+            <li>
+              <a *ngIf="s.facebook" [href]="s.facebook" target="_blank"
+                ><img
+                  class="icon hover:-translate-y-1 transition-all duration-300"
+                  src="images/facebook.svg"
+                  alt=""
+              /></a>
+            </li>
+            <li>
+              <a *ngIf="s.instagram" [href]="s.instagram" target="_blank"
+                ><img
+                  class="icon hover:-translate-y-1 transition-all duration-300"
+                  src="images/instagram.svg"
+                  alt=""
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--Rights-->
+      <div
+        class="rights font-heading text-center text-white-dim text-xs tracking-wide xl:text-sm pt-8"
+      >
+        &copy; 2026 Hannan Stationers Bhaddar. All Rights Reserved.
+      </div>
+    </div>
+  </div>
+</footer>
