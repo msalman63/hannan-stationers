@@ -1,59 +1,117 @@
-# HananStationers
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.13.
-
-## Development server
-
-To start a local development server, run:
-
+# Hannan Stationers
+ 
+Hannan Stationers is our family's local shop in Bhaddar, Gujrat, Punjab, Pakistan selling stationery, grocery, sports and tobacco products. I built this as a real working e-commerce site for the shop. For backend I went with Supabase — it handles database, auth and file storage in one place, solid choice if you want to skip setting up a separate backend.
+ 
+Going to deploy it live in the next couple of weeks.
+ 
+---
+ 
+## How It Works
+ 
+Customers browse products by category, add to cart and place a Cash on Delivery order. After an order we contact the customer on WhatsApp to confirm and arrange delivery.
+ 
+Admin logs in through a protected dashboard to manage products, deals, orders and site settings.
+ 
+---
+ 
+## Tech Stack
+ 
+- **Angular 20** — Frontend
+- **Tailwind CSS** — Styling
+- **Supabase** — Backend, database, auth and file storage
+- **Vercel** — Hosting (coming soon)
+---
+ 
+## Features
+ 
+**Customer Side**
+- Homepage with banner slider and featured products & deals
+- Category pages — Stationery, Grocery, Sports, Tobacco
+- Cart with quantity controls and COD checkout
+- Order confirmation message
+**Admin Dashboard**
+- Protected login with route guards
+- Add, edit and delete products with image upload
+- Manage deals and view incoming orders
+- Update order status — Pending → Confirmed → Delivered
+- Update contact info and social links from settings
+---
+ 
+## Database Tables
+ 
+```
+stationery    → id, name, description, price, image_url, created_at
+grocery       → id, name, description, price, image_url, created_at
+sports        → id, name, description, price, image_url, created_at
+tobacco       → id, name, description, price, image_url, created_at
+deals         → id, name, description, price, image_url, created_at
+orders        → id, firstName, lastName, phone, city, address, postal_code, created_at
+order_items   → id, order_id, product_id, product_name, price, quantity
+settings      → id, key, value
+```
+ 
+---
+ 
+## Running Locally
+ 
+You'll need Node.js 18+ and Angular CLI installed.
+ 
+```bash
+git clone https://github.com/msalman63/hannan-stationers.git
+cd hannan-stationers
+npm install
+```
+ 
+Copy the example environment file and add your Supabase credentials:
+ 
+```bash
+cp src/environments/environment.example.ts src/environments/environment.ts
+```
+ 
+```typescript
+export const environment = {
+  production: false,
+  supabaseUrl: 'YOUR_SUPABASE_URL_HERE',
+  supabaseKey: 'YOUR_SUPABASE_ANON_KEY_HERE'
+};
+```
+ 
 ```bash
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+ 
+---
+ 
+## Project Structure
+ 
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+hannan-stationers/
+├── public/images/                # Static assets
+├── src/app/
+│   ├── admin-dashboard/          # Admin panel components
+│   ├── auth/login/               # Admin login
+│   ├── guards/                   # Route protection
+│   ├── interfaces/               # TypeScript interfaces
+│   ├── layouts/main-layout/      # Header & footer
+│   ├── pages/                    # Customer facing pages
+│   └── shared/
+│       ├── components/           # Reusable UI components
+│       └── services/             # Cart, product, supabase etc.
+└── src/environments/
+    ├── environment.example.ts    # Safe template — copy this
+    └── environment.ts            # Your credentials — gitignored
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ 
+---
+ 
+## Screenshots
+ 
+*Coming soon after deployment*
+ 
+---
+ 
+## Author
+ 
+**Muhammad Salman**
+ 
+[LinkedIn](https://www.linkedin.com/in/muhammadsalman063) · [GitHub](https://github.com/msalman63) · [X](https://x.com/iamsalman063) 
