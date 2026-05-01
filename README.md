@@ -2,7 +2,11 @@
  
 Hannan Stationers is our family's local shop in Bhaddar, Gujrat, Punjab, Pakistan selling stationery, grocery, sports and tobacco products. I built this as a real working e-commerce site for the shop. For backend I went with Supabase — it handles database, auth and file storage in one place, solid choice if you want to skip setting up a separate backend.
  
-Going to deploy it live in the next couple of weeks.
+---
+ 
+## Live Demo
+ 
+https://hannan-stationers-la5l.vercel.app
  
 ---
  
@@ -19,7 +23,7 @@ Admin logs in through a protected dashboard to manage products, deals, orders an
 - **Angular 20** — Frontend
 - **Tailwind CSS** — Styling
 - **Supabase** — Backend, database, auth and file storage
-- **Vercel** — Hosting (coming soon)
+- **Vercel** — Hosting
 ---
  
 ## Features
@@ -106,7 +110,10 @@ hannan-stationers/
  
 ## Screenshots
  
-*Coming soon after deployment*
+![Homepage](screenshots/homepage.png)
+![Products](screenshots/products.png)
+![Checkout](screenshots/checkout.png)
+![Admin Dashboard](screenshots/dashboard.png)
  
 ---
  
@@ -114,4 +121,4 @@ hannan-stationers/
  
 **Muhammad Salman**
  
-[LinkedIn](https://www.linkedin.com/in/muhammadsalman063) · [GitHub](https://github.com/msalman63) · [X](https://x.com/iamsalman063) 
+[LinkedIn](https://www.linkedin.com/in/muhammadsalman063) · [GitHub](https://github.com/msalman63) · [X](https://x.com/iamsalman063) · [Fiverr](https://www.fiverr.com/users/msalman63)
