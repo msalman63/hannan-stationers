@@ -1,5 +1,5 @@
 <div
-  class="side-bar-component fixed inset-0 z-20 h-screen w-full bg-[rgba(0,0,0,0.4)] transition-opacity duration-300"
+  class="side-bar-component fixed inset-0 z-50 h-screen w-full bg-[rgba(0,0,0,0.4)] transition-opacity duration-300"
   [class.opacity-0]="!cartService.isCartOpen()"
   [class.pointer-events-none]="!cartService.isCartOpen()"
   (click)="cartService.closeCart()"
