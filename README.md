@@ -111,17 +111,17 @@ hannan-stationers/
 ## Screenshots
 
 ### Desktop
-![Homepage](screenshots/hannan1.png)
-![Collection](screenshots/hannan2.png)
-![Stationery](screenshots/hannan4.png)
+![Homepage](screenshots/hannan1.jpeg)
+![Collection](screenshots/hannan2.jpeg)
+![Stationery](screenshots/hannan4.jpeg)
 
 ### Mobile
-![Mobile View](screenshots/hannan3.png)
+![Mobile View](screenshots/hannan3.jpeg)
 
 ### Admin Dashboard
-![Dashboard](screenshots/hannan5.png)
-![Add Product](screenshots/hannan7.png)
-![Update Product](screenshots/hannan6.png)
+![Dashboard](screenshots/hannan5.jpeg)
+![Add Product](screenshots/hannan7.jpeg)
+![Update Product](screenshots/hannan6.jpeg)
  
 ---
  
