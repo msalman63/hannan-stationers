@@ -109,11 +109,19 @@ hannan-stationers/
 ---
  
 ## Screenshots
- 
-![Homepage](screenshots/homepage.png)
-![Products](screenshots/products.png)
-![Checkout](screenshots/checkout.png)
-![Admin Dashboard](screenshots/dashboard.png)
+
+### Desktop
+![Homepage](screenshots/hannan1.png)
+![Collection](screenshots/hannan2.png)
+![Stationery](screenshots/hannan4.png)
+
+### Mobile
+![Mobile View](screenshots/hannan3.png)
+
+### Admin Dashboard
+![Dashboard](screenshots/hannan5.png)
+![Add Product](screenshots/hannan7.png)
+![Update Product](screenshots/hannan6.png)
  
 ---
  
