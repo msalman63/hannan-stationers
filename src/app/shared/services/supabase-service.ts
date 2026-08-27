@@ -29,7 +29,14 @@ export class SupabaseService {
 
   constructor() {
     // Initialize Supabase client with project URL and public anon key
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+    });
+    console.log('Supabase Key being used:', environment.supabaseKey?.substring(0, 20));
   }
 
   //  Auth Functions
@@ -365,32 +372,75 @@ export class SupabaseService {
   }
   //Save Order Function to add the customer,order,product data
   async saveOrder(
-    customerData: CustomerInfo,
-    cartItems: CartItem[],
-    shipping: number,
-    total: number,
-  ) {
-    const { data: order_data, error: order_error } = await this.supabase
-      .from('orders')
-      .insert([{ ...customerData, shipping: shipping, total: total }])
-      .select()
-      .single();
-    if (order_error) throw order_error;
+  customerData: CustomerInfo,
+  cartItems: CartItem[],
+  shipping: number,
+  total: number,
+) {
+  // Generate the order ID ourselves so we don't need .select()
+  const orderId = crypto.randomUUID();
 
-    const orderItems = cartItems.map((item) => ({
-      order_id: order_data.id,
-      product_id: item.id,
-      name: item.name,
-      image: item.image,
-      price: item.price,
-      quantity: item.quantity,
-      category: item.category,
-    }));
-    const { data: orderItem_data, error: orderItem_error } = await this.supabase
-      .from('order_items')
-      .insert(orderItems)
-      .select();
-    if (orderItem_error) throw orderItem_error;
-    return { order_data, orderItem_data };
+  console.log('Creating order:', orderId);
+
+  // ---------------------------------------------------------
+  // 1. Insert the order
+  // ---------------------------------------------------------
+
+  const orderPayload = {
+    id: orderId,
+    ...customerData,
+    shipping,
+    total,
+  };
+
+  const { error: orderError } = await this.supabase
+    .from('orders')
+    .insert([orderPayload]);
+
+  if (orderError) {
+    console.error('Order insert failed:', orderError);
+    throw orderError;
   }
+
+  console.log('✅ Order created:', orderId);
+
+  // ---------------------------------------------------------
+  // 2. Prepare order items
+  // ---------------------------------------------------------
+
+  const orderItems = cartItems.map((item) => ({
+    order_id: orderId,
+    product_id: item.id,
+    name: item.name,
+    image: item.image,
+    price: item.price,
+    quantity: item.quantity,
+    category: item.category,
+  }));
+
+  // ---------------------------------------------------------
+  // 3. Insert order items
+  // ---------------------------------------------------------
+
+  const { data: orderItemData, error: orderItemError } =
+    await this.supabase
+      .from('order_items')
+      .insert(orderItems);
+
+  if (orderItemError) {
+    console.error('Order items insert failed:', orderItemError);
+    throw orderItemError;
+  }
+
+  console.log('✅ Order items created');
+
+  // ---------------------------------------------------------
+  // 4. Return the created order information
+  // ---------------------------------------------------------
+
+  return {
+    order_data: orderPayload,
+    orderItem_data: orderItemData,
+  };
+}
 }
